@@ -16,6 +16,7 @@ import JobForm from "../../features/JobForm";
 import UserApplications from "../../features/UserApplications";
 import Profile from "../../features/Profile";
 import {PrivateRoute, SuperPrivateRoute, PublicRoute} from "../../features/PrivateRoute";
+import JobFormEdit from "../../features/JobFormEdit";
 
 function App() {
     const {commonStore, userStore} = useStore()
@@ -46,6 +47,7 @@ function App() {
                     <Route path={'/dashboard/:jobId'} element={<SuperPrivateRoute><JobApplications/></SuperPrivateRoute>}/>
                     <Route path={'/dashboard/:jobId/application/:appId'} element={<SuperPrivateRoute><ApplicationView/></SuperPrivateRoute>}/>
                     <Route path={'/dashboard/jobs/create'} element={<JobForm/>}/>
+                    <Route path={'/dashboard/jobs/edit/:jobId'} element={<JobFormEdit/>}/>
                     <Route path={'/user/applications'} element={<PrivateRoute><UserApplications/></PrivateRoute>}/>
                     <Route path={'/user'} element={<PrivateRoute><Profile/></PrivateRoute>}/>
                     <Route path={'/user/:userId'} element={<PrivateRoute><Profile/></PrivateRoute>}/>

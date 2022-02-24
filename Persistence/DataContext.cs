@@ -10,8 +10,6 @@ namespace Persistence
         {
         }
 
-        
-
         /// <summary>
         /// Jobs table
         /// </summary>

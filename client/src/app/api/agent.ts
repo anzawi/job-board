@@ -11,7 +11,7 @@ axios.interceptors.request.use(config => {
     const token = store.commonStore.token
     if (token)
         config.headers!.Authorization = `Bearer ${token}`
-    
+
     return config
 })
 
@@ -24,7 +24,7 @@ axios.interceptors.response.use(async response => {
 }, rejected => {
     if (rejected === 'Request failed with status code 401')
         console.log(rejected)
-        History.push('/')
+    History.push('/')
 })
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
@@ -46,7 +46,8 @@ const Jobs = {
     list: () => requests.get<Job[]>('/jobs'),
     single: (uuid: string) => requests.get<Job>(`/jobs/${uuid}`),
     create: (job: JobForm) => requests.post<Job>('/jobs', job),
-    update: (job: Job) => requests.put<Job>(`/jobs/${job.id}`, job)
+    update: (job: JobForm, id: string) => requests.put<Job>(`/jobs/${id}`, job),
+    delete: (id: string) => requests.del<Job>(`/jobs/${id}`),
 }
 
 const Applications = {
@@ -62,7 +63,7 @@ const Auth = {
     login: (creds: UserForms) => requests.post<User>('/auth/login', creds),
     userApplications: () => requests.get<Application[]>('/applications/user'),
     upload: (data: FormData) => requests.upload('/auth/upload-resume', data),
-    get: (email: string) =>  requests.get<User>(`/auth/${email}`),
+    get: (email: string) => requests.get<User>(`/auth/${email}`),
 }
 
 const agents = {
