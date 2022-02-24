@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
+    /// <summary>
+    /// Seed some data
+    /// </summary>
     public class Seed
     {
         // seed some jobs

@@ -12,6 +12,9 @@ using Persistence;
 
 namespace Application.Applications
 {
+    /// <summary>
+    /// get all applications for user
+    /// </summary>
     public class UserList
     {
         public class Query : IRequest<ResponseResult<List<Domain.Application>>>

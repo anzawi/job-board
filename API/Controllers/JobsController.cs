@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// jobs controller
+    /// </summary>
     public class JobsController : MainController
     {
         // get all jobs

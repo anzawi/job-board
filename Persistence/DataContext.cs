@@ -10,8 +10,17 @@ namespace Persistence
         {
         }
 
+        
 
+        /// <summary>
+        /// Jobs table
+        /// </summary>
         public DbSet<Job> Jobs { set; get; }
+        /// <summary>
+        /// Applications table
+        /// </summary>
         public DbSet<Application> Applications { set; get; }
+        
+        // users table will handle from identity framework
     }
 }

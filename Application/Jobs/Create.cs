@@ -9,13 +9,20 @@ using Persistence;
 
 namespace Application.Jobs
 {
+    /// <summary>
+    /// create new job
+    /// </summary>
     public class Create
     {
         public class Command : IRequest<ResponseResult<Job>>
         {
+            // job details
             public Job Job { set; get; }
         }
 
+        /// <summary>
+        /// data validation
+        /// </summary>
         public class CommandValidator : AbstractValidator<Command>
         {
             public CommandValidator()
@@ -24,6 +31,9 @@ namespace Application.Jobs
             }
         }
 
+        /// <summary>
+        /// handle creating
+        /// </summary>
         public class Handler : IRequestHandler<Command, ResponseResult<Job>>
         {
             private readonly DataContext _context;
@@ -35,6 +45,7 @@ namespace Application.Jobs
 
             public async Task<ResponseResult<Job>> Handle(Command request, CancellationToken cancellationToken)
             {
+                // insert new job to database
                 var job = _context.Add(request.Job);
                 var created = await _context.SaveChangesAsync(cancellationToken) > 0;
                 return !created

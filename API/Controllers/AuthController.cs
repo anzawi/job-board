@@ -16,6 +16,10 @@ using Persistence;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// auth controller
+    /// to manage users, login, register and logout
+    /// </summary>
     [AllowAnonymous]
     public class AuthController : MainController
     {
@@ -33,22 +37,36 @@ namespace API.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// login
+        /// </summary>
+        /// <param name="loginDetails"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDetails)
         {
+            // check if email exists
             var user = await _userManager.FindByEmailAsync(loginDetails.Email);
             if (user == null) return Unauthorized();
 
+            // try login using password
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDetails.Password, false);
 
+            // check if login process success
             if (result.Succeeded)
             {
                 return CreateUserObject(user);
             }
 
+            // if users is not exists return unauthorized status
             return Unauthorized();
         }
 
+        /// <summary>
+        /// create new user
+        /// </summary>
+        /// <param name="registerDto"></param>
+        /// <returns></returns>
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
@@ -64,22 +82,29 @@ namespace API.Controllers
                 return BadRequest("Username taken");
             }
 
+            // create user object
             var user = new AppUser
             {
                 Email = registerDto.Email,
                 UserName = registerDto.Username
             };
 
+            // create a user
             var userWasCreated = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (userWasCreated.Succeeded)
             {
+                // return created user to make front-end make him login after register
                 return CreateUserObject(user);
             }
 
             return BadRequest("unable to registering new user");
         }
 
+        /// <summary>
+        /// get authorized user 
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
@@ -89,6 +114,11 @@ namespace API.Controllers
             return CreateUserObject(user);
         }
         
+        /// <summary>
+        /// get user by email [for view application page]
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpGet("{email}")]
         public async Task<ActionResult<UserDto>> GetUserByEmail(string email)
         {
@@ -97,16 +127,25 @@ namespace API.Controllers
             return CreateUserObject(user);
         }
 
+        /// <summary>
+        /// upload user resume
+        /// </summary>
+        /// <param name="resume"></param>
+        /// <returns></returns>
         [HttpPost("upload-resume")]
         public async Task<IActionResult> UploadResume([FromForm]IFormFile resume)
         {
+            // if file is empty
             if (resume.Length <= 0) return Ok();
             
+            // get user
             var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
             
+            // init file path
             var filePath = Path.Combine("Resumes", 
                 Path.GetFileName(resume.FileName));
 
+            // trying create file
             await using (var stream = System.IO.File.Create(filePath))
             {
                 await resume.CopyToAsync(stream);
@@ -116,9 +155,14 @@ namespace API.Controllers
             }
             
 
-            return Ok();
+            return Ok("");
         }
 
+        /// <summary>
+        /// download user resume
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         [HttpGet("download/{fileName}")]
         public PhysicalFileResult DownloadResume(string fileName)
         {
@@ -130,6 +174,11 @@ namespace API.Controllers
             return new PhysicalFileResult(path, contentType);
         }
 
+        /// <summary>
+        /// helper method to generate user data transform object
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         private UserDto CreateUserObject(AppUser user)
         {
             return new UserDto

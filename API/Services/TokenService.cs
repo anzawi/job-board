@@ -9,6 +9,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace API.Services
 {
+    /// <summary>
+    /// manage and generate tokens
+    /// </summary>
     public class TokenService
     {
         private readonly IConfiguration _config;
@@ -18,8 +21,14 @@ namespace API.Services
             _config = config;
         }
 
+        /// <summary>
+        /// create token
+        /// </summary>
+        /// <param name="user">user model</param>
+        /// <returns></returns>
         public string GenerateToken(AppUser user)
         {
+            // init claims
             var claims = new List<Claim>
             {
                 new(ClaimTypes.Name, user.UserName),
@@ -27,9 +36,12 @@ namespace API.Services
                 new(ClaimTypes.Email, user.Email),
             };
 
+            // its good to store token-key in config file but now I just want to keep it
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetValue<string>("TokenKey")));
+            // create credentials
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
+            // create token
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
                 Subject = new ClaimsIdentity(claims),

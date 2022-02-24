@@ -9,6 +9,9 @@ using Microsoft.Extensions.Logging;
 
 namespace API.Middleware
 {
+    /// <summary>
+    /// custom error handler for development
+    /// </summary>
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;

@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using API.DTOs;
 using Application.Applications;
-using Domain;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Details = Application.Applications.Details;
 
@@ -32,12 +28,14 @@ namespace API.Controllers
             return Response(await Mediator.Send(new Details.Query { Id = id }));
         }
 
+        // get all user applications
         [HttpGet("user")]
         public async Task<ActionResult<List<Domain.Application>>> GetUserApplications()
         {
             return Response(await Mediator.Send(new UserList.Query()));
         }
 
+        // apply to job
         [HttpPost("{jobId}")]
         public async Task<ActionResult<Domain.Application>> CreateApplication(Guid jobId, Domain.Application application)
         {
