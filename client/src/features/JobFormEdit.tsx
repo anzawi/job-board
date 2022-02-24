@@ -33,8 +33,8 @@ function JobForm() {
                 title: `${job?.title}`,
                 description: `${job?.description}`,
                 companyName: `${job?.companyName}`,
-                salaryFrom:  `${job?.salaryFrom}`,
-                salaryTo:  `${job?.salaryTo}`,
+                salaryFrom:  `${job?.salaryFrom ?? ''}`,
+                salaryTo:  `${job?.salaryTo ?? ''}`,
                 error: null
             }}
             validationSchema={validationSchema}
