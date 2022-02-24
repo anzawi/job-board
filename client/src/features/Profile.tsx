@@ -60,7 +60,7 @@ function Profile() {
                                                 className="ml-2 flex-1 w-0 truncate"> {Other?.resume} </span>
                                         </div>
                                         <div className="ml-4 flex-shrink-0">
-                                            <Link to={`/auth/download/${Other?.resume}`} target="_blank" download
+                                            <Link to={`/api/v1/auth/download/${Other?.resume}`} target="_blank" download
                                                className="font-medium text-indigo-600 hover:text-indigo-500"> Download
                                             </Link>
                                         </div>

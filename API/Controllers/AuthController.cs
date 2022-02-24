@@ -166,11 +166,11 @@ namespace API.Controllers
         [HttpGet("download/{fileName}")]
         public PhysicalFileResult DownloadResume(string fileName)
         {
+            var root = Directory.GetCurrentDirectory();
             //Determine the Content Type of the File.
-            var contentType = "";
-            new FileExtensionContentTypeProvider().TryGetContentType(fileName, out contentType);
+            new FileExtensionContentTypeProvider().TryGetContentType(fileName, out var contentType);
             //Build the File Path.
-            var path = Path.Combine("Resumes/", fileName);
+            var path = Path.Combine($"{root}/Resumes/", fileName);
             return new PhysicalFileResult(path, contentType);
         }
 

@@ -55,7 +55,7 @@ export default function RegisterForm() {
                                </div>
                                <div className="mt-4">
                                    <label className="block text-gray-700 text-sm font-bold mb-2">Current position</label>
-                                   <Field name='currentPosition' className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="email" />
+                                   <Field name='currentPosition' className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="text" />
                                    <ErrorMessage
                                        name={'currentPosition'}
                                        render={error => <p className="text-red-500 text-xs italic">{error}</p>}

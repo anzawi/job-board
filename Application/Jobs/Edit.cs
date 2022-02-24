@@ -10,11 +10,6 @@ using Persistence;
 
 namespace Application.Jobs
 {
-    /// <summary>
-    /// Edit job
-    /// maybe I'll not handle a job editing in front-end
-    /// but its ready in api
-    /// </summary>
     public class Edit
     {
         public class Command : IRequest<ResponseResult<Job>>

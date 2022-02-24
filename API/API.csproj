@@ -24,6 +24,9 @@
       <None Update="Resumes\dummy">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="Resumes\HTA-PSV.pdf">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
@@ -41,6 +44,9 @@
       <_ContentIncludedByDefault Remove="wwwroot\static\js\main.a4557719.js" />
       <_ContentIncludedByDefault Remove="wwwroot\static\js\main.a4557719.js.LICENSE.txt" />
       <_ContentIncludedByDefault Remove="wwwroot\static\js\main.a4557719.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\static\js\main.b1116500.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\static\js\main.b1116500.js.LICENSE.txt" />
+      <_ContentIncludedByDefault Remove="wwwroot\static\js\main.b1116500.js.map" />
     </ItemGroup>
 
 </Project>
