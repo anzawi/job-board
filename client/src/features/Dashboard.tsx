@@ -56,7 +56,7 @@ function Dashboard() {
                                 </p>
                             </div>
                             <div className="w-3/12 flex flex-col items-end justify-between">
-                                <p className="text-xs text-gray-600">{job.createdAt} - {job.expireAt}</p>
+                                <p className="text-xs text-gray-600">{new Date(job.createdAt).toLocaleDateString()} - {new Date(job.expireAt).toLocaleDateString()}</p>
                                 {
                                     job?.applications?.length > 0
                                         ? (<Link

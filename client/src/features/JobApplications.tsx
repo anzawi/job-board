@@ -30,7 +30,7 @@ function JobApplications() {
                                 <dd>{application.user?.email} {application.seen ? (<span>(seen)</span>) : ''}</dd>
                             </div>
                             <div className="w-3/12 flex flex-col items-end justify-between">
-                                <p className="text-xs text-gray-600">{job.createdAt} - {job.expireAt}</p>
+                                <p className="text-xs text-gray-600">{new Date(job.createdAt).toLocaleDateString()} - {new Date(job.expireAt).toLocaleDateString()}</p>
                                 <Link
                                     to={`/dashboard/${job.id}/application/${application.id}`}
                                     className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-indigo-800 focus:ring-indigo-700 text-sm mt-12 mb-6 font-medium leading-none text-center text-white py-2.5 px-5 rounded bg-indigo-700 hover:bg-indigo-600">

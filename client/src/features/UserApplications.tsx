@@ -30,7 +30,7 @@ function UserApplications() {
                             </div>
                            
                             <div className="w-3/12 flex flex-col items-end justify-between">
-                                <p className="text-xs text-gray-600">apply on {application.createdAt}</p>
+                                <p className="text-xs text-gray-600">apply on {new Date(application.createdAt).toLocaleDateString()}</p>
                                 <Link
                                     to={`/jobs/${application.job.id}`}
                                     className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-indigo-800 focus:ring-indigo-700 text-sm mt-12 mb-6 font-medium leading-none text-center text-white py-2.5 px-5 rounded bg-indigo-700 hover:bg-indigo-600">
