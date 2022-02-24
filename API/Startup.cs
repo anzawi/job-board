@@ -100,6 +100,16 @@ namespace API
             services.AddScoped<TokenService>();
             // add user accessor service
             services.AddScoped<IUserAccessor, UserAccessor>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsUserAdmin", policy =>
+                {
+                    policy.Requirements.Add(new UserIsAdminRequirement());
+                });
+            });
+
+            services.AddTransient<IAuthorizationHandler, UserIsAdminRequirementHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

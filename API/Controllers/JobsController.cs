@@ -28,6 +28,7 @@ namespace API.Controllers
         }
 
         // create new job
+        [Authorize(Policy = "IsUserAdmin")]
         [HttpPost]
         public async Task<ActionResult<Job>> CreateJob(Job job)
         {
@@ -35,6 +36,7 @@ namespace API.Controllers
         }
 
         // edit job
+        [Authorize(Policy = "IsUserAdmin")]
         [HttpPut("{id}")]
         public async Task<ActionResult<Job>> UpdateJob(Guid id, Job job)
         {
@@ -43,6 +45,7 @@ namespace API.Controllers
         }
 
         // delete job
+        [Authorize(Policy = "IsUserAdmin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteJob(Guid id)
         {
