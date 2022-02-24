@@ -46,30 +46,82 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            }).AddFluentValidation(config =>
+            {
+                config.RegisterValidatorsFromAssemblyContaining<Application.Jobs.Create>();
+                config.RegisterValidatorsFromAssemblyContaining<Application.Applications.Create>();
+            }).AddNewtonsoftJson(options=>
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" }); });
+
+            // add our cors origin policies
+            services.AddCors(options =>
+            {
+                options.AddPolicy("polisies",
+                    policy => { policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("*"); });
+            });
             
             // add Sqlite service and connection
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            // add mediator service
+            services.AddMediatR(typeof(List.Handler).Assembly);
+            services.AddMediatR(typeof(UserList.Handler).Assembly);
+            // add models auto mapping on properties service
+            services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
+            // add authentication and authorization services
+            services.AddIdentityCore<AppUser>(options => { options.Password.RequireNonAlphanumeric = false; })
+                .AddEntityFrameworkStores<DataContext>()
+                .AddSignInManager<SignInManager<AppUser>>();
             
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" }); });
+            // configure authentication
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("TokenKey")));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = key,
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
+            // add token generator service
+            services.AddScoped<TokenService>();
+            // add user accessor service
+            services.AddScoped<IUserAccessor, UserAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("polisies");
+            // custom Exception handler 
+            app.UseMiddleware<ExceptionMiddleware>();
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                // I dont need this Exception handler , I create owen one!
+                //app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
 
-            app.UseHttpsRedirection();
+            // I dont want to redirect to [https]
+            /*app.UseHttpsRedirection();*/
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
