@@ -129,10 +129,11 @@ namespace API
             // I dont want to redirect to [https]
             /*app.UseHttpsRedirection();*/
 
+            app.UseRouting();
+            
             app.UseDefaultFiles(); // its mean wwwroot folder (we can change it with some configuration)
             app.UseStaticFiles(); // to use react-app files
             
-            app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
 

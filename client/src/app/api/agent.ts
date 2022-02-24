@@ -5,7 +5,7 @@ import {User, UserForms} from "../models/User";
 import {store} from "../stores/store";
 import History from "../helpers/History";
 
-axios.defaults.baseURL = process.env.API_URL;
+axios.defaults.baseURL ="/api/v1";
 
 axios.interceptors.request.use(config => {
     const token = store.commonStore.token

@@ -26,4 +26,21 @@
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\asset-manifest.json" />
+      <_ContentIncludedByDefault Remove="wwwroot\favicon.ico" />
+      <_ContentIncludedByDefault Remove="wwwroot\index.html" />
+      <_ContentIncludedByDefault Remove="wwwroot\logo192.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\logo512.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\manifest.json" />
+      <_ContentIncludedByDefault Remove="wwwroot\robots.txt" />
+      <_ContentIncludedByDefault Remove="wwwroot\static\css\main.9749c2f9.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\static\css\main.9749c2f9.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\static\js\787.c4e7f8f9.chunk.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\static\js\787.c4e7f8f9.chunk.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\static\js\main.a4557719.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\static\js\main.a4557719.js.LICENSE.txt" />
+      <_ContentIncludedByDefault Remove="wwwroot\static\js\main.a4557719.js.map" />
+    </ItemGroup>
+
 </Project>

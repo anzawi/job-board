@@ -36,7 +36,6 @@ namespace API.Services
                 new(ClaimTypes.Email, user.Email),
             };
 
-            // its good to store token-key in config file but now I just want to keep it
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetValue<string>("TokenKey")));
             // create credentials
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
