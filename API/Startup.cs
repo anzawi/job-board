@@ -48,6 +48,12 @@ namespace API
         {
             services.AddControllers();
             
+            // add Sqlite service and connection
+            services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+            });
+            
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" }); });
         }
 
