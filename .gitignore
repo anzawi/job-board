@@ -1,0 +1,12 @@
+API/bin/
+API/obj/
+API/appsettings.json
+Application/obj/
+Application/bin/
+Domain/obj/
+Domain/bin/
+Infrastructure/obj/
+Infrastructure/bin/
+Persistence/obj/
+Persistence/bin/
+.idea/
