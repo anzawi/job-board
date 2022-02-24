@@ -47,7 +47,7 @@ function JobForm() {
                 <div className="py-6">
                     <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm">
                         <div className="w-full p-8">
-                            <p className="text-xl text-gray-600 text-center">Create new Job</p>
+                            <p className="text-xl text-gray-600 text-center">Edit ({job?.title}) Job</p>
                             <Form onSubmit={handleSubmit}>
                                 <ErrorMessage name={'error'}
                                               render={errorMessage => <div
