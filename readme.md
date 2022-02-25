@@ -15,7 +15,7 @@ so you can open any file and read comments if you want to know how things going.
 
 
 
-video demo : https://youtu.be/CT-nJQAe0eE
+video demo : https://youtu.be/BqPhREAXV2k
 
 
 
@@ -106,5 +106,4 @@ the application will create it in first lunch and it will seed some data
 and done :)
 
 if you want to see demo please follow the link :
-
-https://youtu.be/CT-nJQAe0eE
+https://youtu.be/BqPhREAXV2k
