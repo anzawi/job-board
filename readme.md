@@ -41,7 +41,7 @@ please note : when download .Net things make sure the version tab is (5.0.13) no
 * open project directory in your IDE (visual studio or rider or any favorite one).
 * rebuild solution (to install dependencies and compile the project).
 * run .net project
-  *navigate to `/client` directory open `.env.devlopment` 
+*navigate to `/client` directory open `.env.devlopment` 
 * change `REACT_APP_API_URL` to correct url (.net app configure to run on http://localhost:5000), and keep the suffix of url `/api/v1` (if you don't change any configuration skip this step)
 * open your (CMD/Terminal) and navigate to project directory
 * navigate to client directory `cd client`
@@ -55,7 +55,7 @@ please note : when download .Net things make sure the version tab is (5.0.13) no
 * clone this repo or download it.
 * open project directory in your IDE (visual studio or rider or any favorite one).
 * rebuild solution (to install dependencies and compile the project).
-  *navigate to `/client` directory open `.env.devlopment` 
+ *navigate to `/client` directory open `.env.devlopment` 
 * open `.env.production` 
 * make sure the variable `REACT_API_URL` is equal  `/api/v1` [if this file is not exists create it with content] `REACT_APP_API_URL=/api/v1`
 * open your (CMD/Terminal) and navigate to project directory
@@ -85,7 +85,7 @@ dotnet build --configuration Release
 ```
 
 * to run application
-* navigate to `API` directory and run `dot net run`
+* navigate to `API` directory and run `dotnet run`
 * or `dotnet run --property:Configuration=Release` for production
 * to publish project run `dotnet publish -p:PublishProfile=IISServerProfile`
 
