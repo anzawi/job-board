@@ -50,7 +50,7 @@ please note : when download .Net things make sure the version tab is (5.0.13) no
 * react app is running now on `http://localhost:3000`
 * open http://localhost:3000 in your browser and start testing
 
-### if you want to run application on DEV-ENV
+### if you want to run application on PRODUCTION-ENV
 
 * clone this repo or download it.
 * open project directory in your IDE (visual studio or rider or any favorite one).
